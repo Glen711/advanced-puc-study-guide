@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PCME Study Dashboard — Detailed Syllabus</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0f2130;
+    --muted:#99b3c6;
+    --accent:#38d6c9;
+    --accent-2:#60b986;
+    --glass: rgba(255,255,255,0.04);
+    --radius:12px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,var(--bg),#071122 85%);color:#e6f3f2;padding:24px;line-height:1.45; min-height: 100vh;}
+  .wrap{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:20px}
+  header.hero{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(10,25,35,0.6));border:1px solid rgba(255,255,255,0.04)}
+  h1{margin:0;font-size:22px; transition: color 0.3s;}
+  .lead{color:var(--muted);margin:4px 0 0 0;font-size:14px}
+  .quote{color:var(--accent);background:rgba(56,214,201,0.04);padding:8px;border-radius:10px;border:1px solid rgba(56,214,201,0.06)}
+  .phase{font-size:13px;color:#cfeee9}
+  .date-small{font-size:12px;color:var(--muted)}
+
+  .col-left{display:grid;gap:16px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  
+  /* Timer Styles */
+  .timer{display:flex;gap:14px;align-items:center;justify-content:space-between; flex-wrap: wrap;}
+  .time-display{font-size:40px;font-weight:700;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg, rgba(56,214,201,0.05), rgba(96,185,134,0.05));min-width:150px;text-align:center; border: 1px solid rgba(56,214,201,0.1); font-variant-numeric: tabular-nums;}
+  .btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--accent);padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:all .2s;}
+  .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.1);box-shadow:0 6px 18px rgba(56,214,201,0.15)}
+  .btn:active{transform:translateY(0);}
+
+  .tab-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 10px;border-radius:9px;color:var(--muted);cursor:pointer; transition: all 0.2s;}
+  .tab-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042423;box-shadow:0 8px 20px rgba(56,214,201,0.10); font-weight: bold;}
+  .subject-panel{padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03); animation: fadeIn 0.3s ease-in-out;}
+  
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+
+  .topic{display:flex;align-items:flex-start;gap:10px;padding:12px 8px;border-radius:8px;transition:all .2s; border-left: 3px solid transparent;}
+  .topic:hover{background:rgba(255,255,255,0.02);}
+  .topic.completed { opacity: 0.6; border-left: 3px solid var(--accent-2); background:rgba(96,185,134,0.03); }
+  .topic.completed strong { text-decoration: line-through; }
+  
+  .topic input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent-2);margin-top:2px; cursor: pointer;}
+  .topic .meta{margin-left:auto;font-size:12px;color:var(--muted);background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.02)}
+  .subtasks{margin:6px 0 0 28px;color:var(--muted);font-size:13px; transition: opacity 0.3s;}
+  .topic.completed .subtasks { opacity: 0.5; }
+  
+  .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  .resources{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .res-card{padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03); transition: transform 0.2s;}
+  .res-card:hover { transform: translateY(-3px); border-color: rgba(56,214,201,0.3); }
+  .res-card a { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block; margin-top: 8px;}
+  .res-card a:hover { text-decoration: underline; }
+
+  .timetable{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .day{padding:10px;border-radius:10px;min-height:120px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+  .day h6{margin:0;color:var(--muted)}
+  .slot{padding:8px;border-radius:8px;background:linear-gradient(90deg, rgba(56,214,201,0.12), rgba(96,185,134,0.06));color:#042423;font-weight:700;margin-top:8px; font-size: 13px;}
+  .slot.secondary{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--muted);font-weight:600}
+  .rest{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;background:linear-gradient(90deg,#60b986,#7ddaa1);color:#052724;border:1px solid rgba(96,185,134,0.12)}
+  .tips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tip-card{padding:10px;border-radius:10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);}
+  
+  textarea{width:100%;min-height:110px;background:transparent;border:1px dashed rgba(255,255,255,0.1);color:#fff;padding:10px;border-radius:8px;font-size:13px;resize:vertical; font-family: inherit;}
+  textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.02);}
+  
+  .progress .meter{height:16px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden; border: 1px solid rgba(255,255,255,0.05);}
+  .meter > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(56,214,201,0.5);}
+  
+  @media (max-width:1024px){.wrap{grid-template-columns:1fr}.resources{grid-template-columns:repeat(2,1fr)}.tips{grid-template-columns:repeat(2,1fr)}.timetable{grid-template-columns:repeat(4,1fr)}}
+  @media (max-width:560px){.resources{grid-template-columns:1fr}.timetable{grid-template-columns:repeat(2,1fr)}.tips{grid-template-columns:1fr}.timer {flex-direction: column; text-align: center;}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <h1 id="greetingText">Hi Aishu — focused steps beat overwhelm.</h1>
+        <p class="lead">Detailed study checklist below breaks each chapter into tiny, clear tasks.</p>
+        <div style="margin-top:8px"><span class="quote">Start small: finish one micro-task, then another.</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="phase">Phase starts: <strong style="color:var(--accent)">8 June 2026</strong></div>
+        <div class="date-small" id="nowDate">Loading date…</div>
+      </div>
+    </header>
+
+    <section class="col-left">
+      
+      <div class="card">
+        <div class="timer">
+          <div>
+            <h2 style="margin:0 0 4px 0">Focus Session</h2>
+            <p class="hint" style="margin:0">25 minutes of deep work. No distractions.</p>
+          </div>
+          <div class="time-display" id="timeDisplay">25:00</div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn" id="startTimerBtn">Start</button>
+            <button class="btn" id="resetTimerBtn" style="background:transparent; border-color:rgba(255,255,255,0.1); color:var(--muted);">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 8px 0">Syllabus — Detailed Study Tasks</h2>
+        <p class="hint">Open a subject tab to reveal exact subtopics and short study actions.</p>
+
+        <div style="display:flex;gap:8px;margin:10px 0 12px 0;flex-wrap:wrap">
+          <button class="tab-btn active" data-sub="physics">Physics</button>
+          <button class="tab-btn" data-sub="chemistry">Chemistry</button>
+          <button class="tab-btn" data-sub="maths">Mathematics</button>
+          <button class="tab-btn" data-sub="electronics">Electronics</button>
+        </div>
+
+        <div class="subject-panel" id="physics">
+          <div class="topic"><input type="checkbox" data-key="phy_units"><div style="margin-left:10px"><strong>Units & Measurements</strong><div class="subtasks">Read SI units, dimensional analysis; practice 6 MCQs and 3 short problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="phy_motion1"><div style="margin-left:10px"><strong>Motion in a Straight Line</strong><div class="subtasks">Displacement, velocity, acceleration; practice 8 numerical problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="phy_motion2"><div style="margin-left:10px"><strong>Motion in a Plane</strong><div class="subtasks">Vectors, projectile motion; solve 6 projectile problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="phy_laws"><div style="margin-left:10px"><strong>Laws of Motion</strong><div class="subtasks">Free-body diagrams, friction; practice 10 FBD problems.</div></div><div class="meta">High</div></div>
+        </div>
+
+        <div class="subject-panel" id="chemistry" style="display:none">
+          <div class="topic"><input type="checkbox" data-key="chem_bonding"><div style="margin-left:10px"><strong>Chemical Bonding & Structure</strong><div class="subtasks">Ionic/covalent bonds, VSEPR shapes; practice predicting shapes.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="chem_thermo"><div style="margin-left:10px"><strong>Thermodynamics</strong><div class="subtasks">Internal energy, enthalpy; solve 4 enthalpy problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="chem_equil"><div style="margin-left:10px"><strong>Chemical Equilibrium</strong><div class="subtasks">Le Chatelier's principle; practice one Kc problem.</div></div><div class="meta">High</div></div>
+        </div>
+
+        <div class="subject-panel" id="maths" style="display:none">
+          <div class="topic"><input type="checkbox" data-key="math_sets"><div style="margin-left:10px"><strong>Sets, Relations & Functions</strong><div class="subtasks">Venn diagrams, types of functions; solve 6 quick questions.</div></div><div class="meta">Quick Win</div></div>
+          <div class="topic"><input type="checkbox" data-key="math_trig"><div style="margin-left:10px"><strong>Trigonometric Functions</strong><div class="subtasks">Basic identities, graphs; practice 10 identity verifications.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="math_limits"><div style="margin-left:10px"><strong>Limits & Derivatives</strong><div class="subtasks">Limit rules, derivative basics; do 8 limit problems.</div></div><div class="meta">High</div></div>
+        </div>
+
+        <div class="subject-panel" id="electronics" style="display:none">
+          <div class="topic"><input type="checkbox" data-key="elec_basic"><div style="margin-left:10px"><strong>Principles of Electricity</strong><div class="subtasks">Ohm's law, Kirchhoff's rules; practice circuit solving.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="elec_semi"><div style="margin-left:10px"><strong>Semiconductors & Diodes</strong><div class="subtasks">PN junction basics, I-V curve; solve 4 biasing circuits.</div></div><div class="meta">High</div></div>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 8px 0">Study Tips & Video Hub</h2>
+        <div class="tips">
+          <div class="tip-card"><strong>3-Pass Method</strong><div class="hint">Copy with help → Peek when stuck → Solve blank.</div></div>
+          <div class="tip-card"><strong>Electronics Analogy</strong><div class="hint">Voltage=pressure, current=flow, resistor=narrow pipe.</div></div>
+          <div class="tip-card"><strong>Chem "Why" Sheets</strong><div class="hint">1-page per reaction type: reason, reagent, condition.</div></div>
+        </div>
+
+        <div style="margin-top:16px">
+          <div class="resources" role="list">
+            <div class="res-card"><strong>Physics – Units</strong><div class="hint">Parikshe Science</div><a href="https://www.youtube.com/watch?v=LyM0lvrn53M" target="_blank">Watch Video</a></div>
+            <div class="res-card"><strong>Chemistry – Marathon</strong><div class="hint">Vedantu Karnataka</div><a href="https://www.youtube.com/watch?v=1VDGwbRThBU" target="_blank">Watch Video</a></div>
+            <div class="res-card"><strong>Maths – Sets</strong><div class="hint">Vedantu SANKALP</div><a href="https://www.youtube.com/watch?v=2cdegZ7Byj4" target="_blank">Watch Video</a></div>
+            <div class="res-card"><strong>Electronics</strong><div class="hint">Paper analysis</div><a href="https://www.youtube.com/watch?v=uBOGM3gkgrE" target="_blank">Watch Video</a></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside style="display:flex;flex-direction:column;gap:14px">
+      <div class="card progress">
+        <h4 style="margin:0 0 8px 0">Checklist Progress</h4>
+        <div class="meter"><i id="meterFill" style="width:0%"></i></div>
+        <div style="margin-top:8px;color:var(--muted); font-weight: 600;" id="progressText">0 of items done</div>
+      </div>
+
+      <div class="card">
+        <h4 style="margin:0 0 8px 0">Quick Notes</h4>
+        <textarea id="notes" placeholder="Drop formulas, reminders, or things to ask the teacher here..."></textarea>
+      </div>
+
+      <div class="card" style="text-align:center">
+        <h4 style="margin:0 0 6px 0">Gentle Reminder</h4>
+        <p style="margin:0;color:var(--muted); font-size: 14px;">If stress rises: stop, breathe for 3 minutes, then return to a single micro-task.</p>
+      </div>
+    </aside>
+  </div>
+
+<script>
+(function(){
+  // --- Dynamic Greeting ---
+  const hour = new Date().getHours();
+  const greetingEl = document.getElementById('greetingText');
+  let timeGreeting = "Good evening";
+  if(hour < 12) timeGreeting = "Good morning";
+  else if(hour < 18) timeGreeting = "Good afternoon";
+  greetingEl.innerHTML = `${timeGreeting}, Aishu &mdash; focused steps beat overwhelm.`;
+
+  // --- Clock ---
+  const nowEl = document.getElementById('nowDate');
+  function fmt(d){ return d.toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+  nowEl.textContent = fmt(new Date());
+  setInterval(()=> nowEl.textContent = fmt(new Date()), 60_000);
+
+  // --- Tabs ---
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const sub = btn.getAttribute('data-sub');
+      document.querySelectorAll('.subject-panel').forEach(p=>p.style.display = p.id===sub ? 'block' : 'none');
+    });
+  });
+
+  // --- Checklist Persistence & Gamification ---
+  const checks = document.querySelectorAll('.subject-panel input[type="checkbox"]');
+  const meter = document.getElementById('meterFill');
+  const progressText = document.getElementById('progressText');
+  const total = checks.length;
+
+  function triggerConfetti() {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#38d6c9', '#60b986', '#ffffff'] });
+  }
+
+  function updateVisuals(cb) {
+     const topicDiv = cb.closest('.topic');
+     if(cb.checked) {
+         topicDiv.classList.add('completed');
+     } else {
+         topicDiv.classList.remove('completed');
+     }
+  }
+
+  function load(){
+    checks.forEach(cb=>{
+      const key = 'pcme_v2_'+cb.dataset.key; // updated key so it resets clean
+      cb.checked = localStorage.getItem(key) === '1';
+      updateVisuals(cb);
+    });
+    update(false);
+  }
+
+  function update(showConfetti = true){
+    const done = Array.from(checks).filter(c=>c.checked).length;
+    const pct = Math.round((done/total)*100);
+    meter.style.width = pct+'%';
+    progressText.textContent = `${done} of ${total} items done (${pct}%)`;
+    
+    if(done === total && total > 0 && showConfetti) {
+        setTimeout(triggerConfetti, 300);
+    }
+  }
+
+  checks.forEach(cb=>{
+    cb.addEventListener('change', e=>{
+      const key = 'pcme_v2_'+e.target.dataset.key;
+      localStorage.setItem(key, e.target.checked ? '1' : '0');
+      updateVisuals(e.target);
+      update(true);
+      
+      // Mini confetti on individual check
+      if(e.target.checked) {
+          confetti({particleCount: 20, spread: 40, origin: {y: 0.8}});
+      }
+    });
+  });
+
+  // --- Notes ---
+  const ta = document.getElementById('notes');
+  const notesKey = 'pcme_notes_v2';
+  ta.value = localStorage.getItem(notesKey) || '';
+  ta.addEventListener('input', ()=> localStorage.setItem(notesKey, ta.value));
+
+  // --- Pomodoro Timer ---
+  let timerInterval;
+  let timeLeft = 25 * 60; // 25 minutes
+  let isRunning = false;
+  const timeDisplay = document.getElementById('timeDisplay');
+  const startBtn = document.getElementById('startTimerBtn');
+  const resetBtn = document.getElementById('resetTimerBtn');
+
+  function updateDisplay() {
+      const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+      const s = (timeLeft % 60).toString().padStart(2, '0');
+      timeDisplay.textContent = `${m}:${s}`;
+  }
+
+  startBtn.addEventListener('click', () => {
+      if(isRunning) {
+          clearInterval(timerInterval);
+          startBtn.textContent = 'Start';
+          startBtn.style.background = '';
+          isRunning = false;
+      } else {
+          startBtn.textContent = 'Pause';
+          startBtn.style.background = 'rgba(255,255,255,0.15)';
+          isRunning = true;
+          timerInterval = setInterval(() => {
+              if(timeLeft > 0) {
+                  timeLeft--;
+                  updateDisplay();
+              } else {
+                  clearInterval(timerInterval);
+                  isRunning = false;
+                  startBtn.textContent = 'Start';
+                  triggerConfetti();
+                  alert("Focus session complete! Take a 5-minute break.");
+              }
+          }, 1000);
+      }
+  });
+
+  resetBtn.addEventListener('click', () => {
+      clearInterval(timerInterval);
+      isRunning = false;
+      timeLeft = 25 * 60;
+      startBtn.textContent = 'Start';
+      startBtn.style.background = '';
+      updateDisplay();
+  });
+
+  // Initialize
+  load();
+  updateDisplay();
+})();
+</script>
+</body>
+</html>
