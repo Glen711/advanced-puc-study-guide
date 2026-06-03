@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PCME Study Dashboard — Detailed Syllabus</title>
+<title>PCME Ultimate Study Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
   :root{
@@ -14,72 +14,62 @@
     --accent-2:#60b986;
     --glass: rgba(255,255,255,0.04);
     --radius:12px;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color-scheme: dark;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:linear-gradient(180deg,var(--bg),#071122 85%);color:#e6f3f2;padding:24px;line-height:1.45; min-height: 100vh;}
-  .wrap{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:20px}
-  header.hero{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(10,25,35,0.6));border:1px solid rgba(255,255,255,0.04)}
-  h1{margin:0;font-size:22px; transition: color 0.3s;}
-  .lead{color:var(--muted);margin:4px 0 0 0;font-size:14px}
-  .quote{color:var(--accent);background:rgba(56,214,201,0.04);padding:8px;border-radius:10px;border:1px solid rgba(56,214,201,0.06)}
+  body{margin:0;background:linear-gradient(180deg,var(--bg),#071122 85%);color:#e6f3f2;padding:24px;line-height:1.45; min-height:100vh;}
+  .wrap{max-width:1250px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:20px}
+  header.hero{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:20px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(10,25,35,0.6));border:1px solid rgba(255,255,255,0.04)}
+  h1{margin:0;font-size:24px}
+  .lead{color:var(--muted);margin:6px 0 0 0;font-size:14px}
+  .quote{color:var(--accent);background:rgba(56,214,201,0.04);padding:8px;border-radius:10px;border:1px solid rgba(56,214,201,0.06);display:inline-block;}
   .phase{font-size:13px;color:#cfeee9}
   .date-small{font-size:12px;color:var(--muted)}
 
   .col-left{display:grid;gap:16px}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
   
-  /* Timer Styles */
-  .timer{display:flex;gap:14px;align-items:center;justify-content:space-between; flex-wrap: wrap;}
-  .time-display{font-size:40px;font-weight:700;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg, rgba(56,214,201,0.05), rgba(96,185,134,0.05));min-width:150px;text-align:center; border: 1px solid rgba(56,214,201,0.1); font-variant-numeric: tabular-nums;}
-  .btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--accent);padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:all .2s;}
+  .timer{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .time-display{font-size:40px;font-weight:700;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg, rgba(56,214,201,0.05), rgba(96,185,134,0.05));min-width:150px;text-align:center;border:1px solid rgba(56,214,201,0.1);font-variant-numeric:tabular-nums}
+  .btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--accent);padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:all .2s}
   .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.1);box-shadow:0 6px 18px rgba(56,214,201,0.15)}
-  .btn:active{transform:translateY(0);}
 
-  .tab-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 10px;border-radius:9px;color:var(--muted);cursor:pointer; transition: all 0.2s;}
-  .tab-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042423;box-shadow:0 8px 20px rgba(56,214,201,0.10); font-weight: bold;}
-  .subject-panel{padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03); animation: fadeIn 0.3s ease-in-out;}
+  .tab-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 14px;border-radius:9px;color:var(--muted);cursor:pointer;transition:all 0.2s}
+  .tab-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042423;box-shadow:0 8px 20px rgba(56,214,201,0.1);font-weight:bold}
   
-  @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-  }
+  .subject-panel{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03);animation:fadeIn 0.3s ease-in-out}
+  @keyframes fadeIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
 
-  .topic{display:flex;align-items:flex-start;gap:10px;padding:12px 8px;border-radius:8px;transition:all .2s; border-left: 3px solid transparent;}
-  .topic:hover{background:rgba(255,255,255,0.02);}
-  .topic.completed { opacity: 0.6; border-left: 3px solid var(--accent-2); background:rgba(96,185,134,0.03); }
-  .topic.completed strong { text-decoration: line-through; }
+  .topic{display:flex;align-items:flex-start;gap:12px;padding:14px 10px;border-radius:8px;transition:all .2s;border-left:3px solid transparent;margin-bottom:8px;background:rgba(255,255,255,0.01)}
+  .topic:hover{background:rgba(255,255,255,0.02)}
+  .topic.completed{opacity:0.5;border-left-color:var(--accent-2);background:rgba(96,185,134,0.02)}
+  .topic.completed strong{text-decoration:line-through;color:var(--muted)}
   
-  .topic input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent-2);margin-top:2px; cursor: pointer;}
-  .topic .meta{margin-left:auto;font-size:12px;color:var(--muted);background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.02)}
-  .subtasks{margin:6px 0 0 28px;color:var(--muted);font-size:13px; transition: opacity 0.3s;}
-  .topic.completed .subtasks { opacity: 0.5; }
+  .topic input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent-2);margin-top:2px;cursor:pointer}
+  .topic .meta{margin-left:auto;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.04);padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);white-space:nowrap}
+  .subtasks{margin:6px 0 0 32px;color:var(--muted);font-size:13px}
   
-  .hint{font-size:13px;color:var(--muted);margin-top:8px}
-  .resources{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  .res-card{padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03); transition: transform 0.2s;}
-  .res-card:hover { transform: translateY(-3px); border-color: rgba(56,214,201,0.3); }
-  .res-card a { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block; margin-top: 8px;}
-  .res-card a:hover { text-decoration: underline; }
-
+  .hint{font-size:13px;color:var(--muted);margin-top:4px}
+  .resources{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .res-card{padding:12px;border-radius:10px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.03);transition:transform 0.2s}
+  .res-card:hover{transform:translateY(-3px);border-color:rgba(56,214,201,0.3)}
+  .res-card a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:bold;display:inline-block;margin-top:8px}
+  
   .timetable{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-  .day{padding:10px;border-radius:10px;min-height:120px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
-  .day h6{margin:0;color:var(--muted)}
-  .slot{padding:8px;border-radius:8px;background:linear-gradient(90deg, rgba(56,214,201,0.12), rgba(96,185,134,0.06));color:#042423;font-weight:700;margin-top:8px; font-size: 13px;}
-  .slot.secondary{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--muted);font-weight:600}
-  .rest{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;background:linear-gradient(90deg,#60b986,#7ddaa1);color:#052724;border:1px solid rgba(96,185,134,0.12)}
-  .tips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .tip-card{padding:10px;border-radius:10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);}
+  .day{padding:10px;border-radius:10px;min-height:140px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03)}
+  .day h6{margin:0 0 6px 0;color:var(--accent);font-size:14px;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:4px}
+  .slot{padding:6px;border-radius:6px;background:rgba(56,214,201,0.06);color:#e6f3f2;font-size:11px;margin-top:6px;border-left:2px solid var(--accent)}
+  .slot.secondary{background:rgba(255,255,255,0.02);border-left-color:var(--muted);color:var(--muted)}
+  .rest{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;background:linear-gradient(180deg,rgba(96,185,134,0.1),rgba(96,185,134,0.02));border:1px solid rgba(96,185,134,0.2)}
   
-  textarea{width:100%;min-height:110px;background:transparent;border:1px dashed rgba(255,255,255,0.1);color:#fff;padding:10px;border-radius:8px;font-size:13px;resize:vertical; font-family: inherit;}
-  textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.02);}
+  textarea{width:100%;min-height:120px;background:transparent;border:1px dashed rgba(255,255,255,0.1);color:#fff;padding:10px;border-radius:8px;font-size:13px;resize:vertical;font-family:inherit}
+  textarea:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,0.02)}
+  .progress .meter{height:16px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,0.05)}
+  .meter > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 0.6s cubic-bezier(0.4, 0, 0.2, 1)}
   
-  .progress .meter{height:16px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden; border: 1px solid rgba(255,255,255,0.05);}
-  .meter > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(56,214,201,0.5);}
-  
-  @media (max-width:1024px){.wrap{grid-template-columns:1fr}.resources{grid-template-columns:repeat(2,1fr)}.tips{grid-template-columns:repeat(2,1fr)}.timetable{grid-template-columns:repeat(4,1fr)}}
-  @media (max-width:560px){.resources{grid-template-columns:1fr}.timetable{grid-template-columns:repeat(2,1fr)}.tips{grid-template-columns:1fr}.timer {flex-direction: column; text-align: center;}}
+  @media (max-width:1100px){.wrap{grid-template-columns:1fr}.resources{grid-template-columns:repeat(2,1fr)}.timetable{grid-template-columns:repeat(4,1fr)}}
+  @media (max-width:700px){.timetable{grid-template-columns:repeat(2,1fr)}.resources{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -87,243 +77,222 @@
     <header class="hero">
       <div>
         <h1 id="greetingText">Hi Aishu — focused steps beat overwhelm.</h1>
-        <p class="lead">Detailed study checklist below breaks each chapter into tiny, clear tasks.</p>
-        <div style="margin-top:8px"><span class="quote">Start small: finish one micro-task, then another.</span></div>
+        <p class="lead">Micro-sessions broken down into clear targets. One checkbox at a time[cite: 1].</p>
       </div>
       <div style="text-align:right">
-        <div class="phase">Phase starts: <strong style="color:var(--accent)">8 June 2026</strong></div>
-        <div class="date-small" id="nowDate">Loading date…</div>
+        <div class="phase">Phase starts: <strong style="color:var(--accent)">8 June 2026</strong>[cite: 1]</div>
+        <div class="date-small" id="nowDate">Loading date…[cite: 1]</div>
       </div>
     </header>
 
     <section class="col-left">
-      
+      <!-- Pomodoro Module -->
       <div class="card">
         <div class="timer">
           <div>
-            <h2 style="margin:0 0 4px 0">Focus Session</h2>
-            <p class="hint" style="margin:0">25 minutes of deep work. No distractions.</p>
+            <h2 style="margin:0 0 4px 0">Focus Timer</h2>
+            <p class="hint" style="margin:0">Lock in for 25 minutes of high-intensity study.</p>
           </div>
           <div class="time-display" id="timeDisplay">25:00</div>
-          <div style="display: flex; gap: 8px;">
+          <div style="display:flex;gap:8px">
             <button class="btn" id="startTimerBtn">Start</button>
-            <button class="btn" id="resetTimerBtn" style="background:transparent; border-color:rgba(255,255,255,0.1); color:var(--muted);">Reset</button>
+            <button class="btn" id="resetTimerBtn" style="background:transparent;border-color:rgba(255,255,255,0.1);color:var(--muted)">Reset</button>
           </div>
         </div>
       </div>
 
+      <!-- Syllabus Framework -->
       <div class="card">
-        <h2 style="margin:0 0 8px 0">Syllabus — Detailed Study Tasks</h2>
-        <p class="hint">Open a subject tab to reveal exact subtopics and short study actions.</p>
-
-        <div style="display:flex;gap:8px;margin:10px 0 12px 0;flex-wrap:wrap">
+        <h2 style="margin:0 0 8px 0">Granular Session Checklist</h2>
+        <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap">
           <button class="tab-btn active" data-sub="physics">Physics</button>
           <button class="tab-btn" data-sub="chemistry">Chemistry</button>
           <button class="tab-btn" data-sub="maths">Mathematics</button>
           <button class="tab-btn" data-sub="electronics">Electronics</button>
         </div>
 
+        <!-- PHYSICS -->
         <div class="subject-panel" id="physics">
-          <div class="topic"><input type="checkbox" data-key="phy_units"><div style="margin-left:10px"><strong>Units & Measurements</strong><div class="subtasks">Read SI units, dimensional analysis; practice 6 MCQs and 3 short problems.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="phy_motion1"><div style="margin-left:10px"><strong>Motion in a Straight Line</strong><div class="subtasks">Displacement, velocity, acceleration; practice 8 numerical problems.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="phy_motion2"><div style="margin-left:10px"><strong>Motion in a Plane</strong><div class="subtasks">Vectors, projectile motion; solve 6 projectile problems.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="phy_laws"><div style="margin-left:10px"><strong>Laws of Motion</strong><div class="subtasks">Free-body diagrams, friction; practice 10 FBD problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_units"><div style="margin-left:10px"><strong>Units & Measurements (Session 1)</strong><div class="subtasks">Read SI fundamental vs derived units; derive dimensions for Force, Work, and Pressure; solve 5 absolute/relative error percentage problems[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_motion_v"><div style="margin-left:10px"><strong>Motion: Vectors & Relative Speed (Session 2)</strong><div class="subtasks">Decompose vectors using cosine/sine laws; solve 4 downstream/upstream relative velocity problems; plot position-time graphs[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_projectile"><div style="margin-left:10px"><strong>Projectile Mechanics (Session 3)</strong><div class="subtasks">Derive Time of Flight, Maximum Height, and Horizontal Range equations; solve 5 standard trajectory problems[cite: 1].</div></div><div class="meta">Core Concept</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_fbd"><div style="margin-left:10px"><strong>Newton's Laws & FBDs (Session 4)</strong><div class="subtasks">Master drawing Free-Body Diagrams; solve 3 multi-block tension strings and 3 inclined friction planes equations[cite: 1].</div></div><div class="meta">Critical</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_work_energy"><div style="margin-left:10px"><strong>Work-Energy Theorem (Session 5)</strong><div class="subtasks">Apply W = delta K to variable force problems; solve 4 conservation of mechanical energy block-and-spring problems[cite: 1].</div></div><div class="meta">Scoring</div></div>
+          <div class="topic"><input type="checkbox" data-key="p_thermo"><div style="margin-left:10px"><strong>Thermodynamics Loops (Session 6)</strong><div class="subtasks">Calculate internal energy using first law ($\Delta U = Q - W$); solve 4 PV cyclical diagrams for net work output[cite: 1].</div></div><div class="meta">Formula Heavy</div></div>
         </div>
 
+        <!-- CHEMISTRY -->
         <div class="subject-panel" id="chemistry" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="chem_bonding"><div style="margin-left:10px"><strong>Chemical Bonding & Structure</strong><div class="subtasks">Ionic/covalent bonds, VSEPR shapes; practice predicting shapes.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="chem_thermo"><div style="margin-left:10px"><strong>Thermodynamics</strong><div class="subtasks">Internal energy, enthalpy; solve 4 enthalpy problems.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="chem_equil"><div style="margin-left:10px"><strong>Chemical Equilibrium</strong><div class="subtasks">Le Chatelier's principle; practice one Kc problem.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="c_vsepr"><div style="margin-left:10px"><strong>VSEPR & Geometry (Session 1)</strong><div class="subtasks">Predict geometry and hybridisation for $BF_3, SF_6, PCl_5, NH_3, H_2O$; draw Lewis structures showing explicit lone pairs[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="c_hess"><div style="margin-left:10px"><strong>Thermochemistry & Hess's Law (Session 2)</strong><div class="subtasks">Calculate overall reaction enthalpies by combining intermediate step equations; solve 4 standard heat of formation problems[cite: 1].</div></div><div class="meta">Numerical</div></div>
+          <div class="topic"><input type="checkbox" data-key="c_le_chatelier"><div style="margin-left:10px"><strong>Chemical Equilibrium (Session 3)</strong><div class="subtasks">State shifts when changing pressure, volume, temperature; solve 3 structural $K_c$ and $K_p$ value calculations[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="c_nomenclature"><div style="margin-left:10px"><strong>IUPAC Organic Rules (Session 4)</strong><div class="subtasks">Apply lowest-locant rule to polyfunctional chains; draw structures for 8 advanced branched alkanes/alkenes[cite: 1].</div></div><div class="meta">Fundamental</div></div>
+          <div class="topic"><input type="checkbox" data-key="c_stoich"><div style="margin-left:10px"><strong>Limiting Reagents (Session 5)</strong><div class="subtasks">Identify excess vs limiting reactants from initial masses; calculate product yields using molar mass conversion tracking[cite: 1].</div></div><div class="meta">Scoring</div></div>
         </div>
 
+        <!-- MATHEMATICS -->
         <div class="subject-panel" id="maths" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="math_sets"><div style="margin-left:10px"><strong>Sets, Relations & Functions</strong><div class="subtasks">Venn diagrams, types of functions; solve 6 quick questions.</div></div><div class="meta">Quick Win</div></div>
-          <div class="topic"><input type="checkbox" data-key="math_trig"><div style="margin-left:10px"><strong>Trigonometric Functions</strong><div class="subtasks">Basic identities, graphs; practice 10 identity verifications.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="math_limits"><div style="margin-left:10px"><strong>Limits & Derivatives</strong><div class="subtasks">Limit rules, derivative basics; do 8 limit problems.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="m_venn"><div style="margin-left:10px"><strong>Venn Sets & Operations (Session 1)</strong><div class="subtasks">Shade union, intersection, and complements; solve 5 three-set word problems using intersection equations[cite: 1].</div></div><div class="meta">Quick Win</div></div>
+          <div class="topic"><input type="checkbox" data-key="m_trig_id"><div style="margin-left:10px"><strong>Trigonometric Transformations (Session 2)</strong><div class="subtasks">Memorize and derive compound angles; prove 6 identities using sum-to-product conversions[cite: 1].</div></div><div class="meta">Core Skill</div></div>
+          <div class="topic"><input type="checkbox" data-key="m_limits"><div style="margin-left:10px"><strong>Limits & L'Hospital (Session 3)</strong><div class="subtasks">Evaluate $0/0$ and $\infty/\infty$ indeterminate forms using factoring, rationalization, and L'Hospital's Rule[cite: 1].</div></div><div class="meta">Critical</div></div>
+          <div class="topic"><input type="checkbox" data-key="m_derivatives"><div style="margin-left:10px"><strong>First Principles Derivatives (Session 4)</strong><div class="subtasks">Solve limit definitions of derivatives; practice product, quotient, and chain rules on 10 explicit algebraic expressions[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="m_lines"><div style="margin-left:10px"><strong>Straight Lines Coords (Session 5)</strong><div class="subtasks">Convert between slope-intercept, intercept, and normal line equations; calculate shortest distance from point to line[cite: 1].</div></div><div class="meta">Scoring</div></div>
         </div>
 
+        <!-- ELECTRONICS -->
         <div class="subject-panel" id="electronics" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="elec_basic"><div style="margin-left:10px"><strong>Principles of Electricity</strong><div class="subtasks">Ohm's law, Kirchhoff's rules; practice circuit solving.</div></div><div class="meta">High</div></div>
-          <div class="topic"><input type="checkbox" data-key="elec_semi"><div style="margin-left:10px"><strong>Semiconductors & Diodes</strong><div class="subtasks">PN junction basics, I-V curve; solve 4 biasing circuits.</div></div><div class="meta">High</div></div>
+          <div class="topic"><input type="checkbox" data-key="e_kcl_kvl"><div style="margin-left:10px"><strong>Kirchhoff's Circuit Laws (Session 1)</strong><div class="subtasks">Set up loop current equations for 3-mesh resistive networks; solve individual branches for precise current/voltage drop[cite: 1].</div></div><div class="meta">High Weight</div></div>
+          <div class="topic"><input type="checkbox" data-key="e_phasors"><div style="margin-left:10px"><strong>AC Fundamentals & Phasors (Session 2)</strong><div class="subtasks">Convert peak to RMS values; draw phase relationship graphs for purely inductive, capacitive, and resistive circuits[cite: 1].</div></div><div class="meta">Core Concept</div></div>
+          <div class="topic"><input type="checkbox" data-key="e_diodes"><div style="margin-left:10px"><strong>Semiconductor Diodes (Session 3)</strong><div class="subtasks">Draw forward/reverse bias characteristic curves; track current flow in half-wave vs full-wave bridge rectifier layouts[cite: 1].</div></div><div class="meta">Critical</div></div>
+          <div class="topic"><input type="checkbox" data-key="e_logic"><div style="margin-left:10px"><strong>Logic Gates & Boolean (Session 4)</strong><div class="subtasks">Construct truth tables for combined AND, OR, NOT, NAND, NOR setups; simplify expressions using De Morgan's Laws[cite: 1].</div></div><div class="meta">Quick Win</div></div>
         </div>
-
       </div>
 
+      <!-- Video Reference Hub -->
       <div class="card">
-        <h2 style="margin:0 0 8px 0">Study Tips & Video Hub</h2>
-        <div class="tips">
-          <div class="tip-card"><strong>3-Pass Method</strong><div class="hint">Copy with help → Peek when stuck → Solve blank.</div></div>
-          <div class="tip-card"><strong>Electronics Analogy</strong><div class="hint">Voltage=pressure, current=flow, resistor=narrow pipe.</div></div>
-          <div class="tip-card"><strong>Chem "Why" Sheets</strong><div class="hint">1-page per reaction type: reason, reagent, condition.</div></div>
-        </div>
-
-        <div style="margin-top:16px">
-          <div class="resources" role="list">
-            <div class="res-card"><strong>Physics – Units</strong><div class="hint">Parikshe Science</div><a href="https://www.youtube.com/watch?v=LyM0lvrn53M" target="_blank">Watch Video</a></div>
-            <div class="res-card"><strong>Chemistry – Marathon</strong><div class="hint">Vedantu Karnataka</div><a href="https://www.youtube.com/watch?v=1VDGwbRThBU" target="_blank">Watch Video</a></div>
-            <div class="res-card"><strong>Maths – Sets</strong><div class="hint">Vedantu SANKALP</div><a href="https://www.youtube.com/watch?v=2cdegZ7Byj4" target="_blank">Watch Video</a></div>
-            <div class="res-card"><strong>Electronics</strong><div class="hint">Paper analysis</div><a href="https://www.youtube.com/watch?v=uBOGM3gkgrE" target="_blank">Watch Video</a></div>
-          </div>
+        <h2 style="margin:0 0 12px 0">Curated Video Library</h2>
+        <div class="resources">
+          <div class="res-card"><strong>Physics Mechanics</strong><div class="hint">Parikshe Science</div><a href="https://www.youtube.com/watch?v=LyM0lvrn53M" target="_blank">Open Lesson</a></div>
+          <div class="res-card"><strong>Chemistry Core</strong><div class="hint">Vedantu Karnataka</div><a href="https://www.youtube.com/watch?v=1VDGwbRThBU" target="_blank">Open Lesson</a></div>
+          <div class="res-card"><strong>Maths Complete Sets</strong><div class="hint">Vedantu SANKALP</div><a href="https://www.youtube.com/watch?v=2cdegZ7Byj4" target="_blank">Open Lesson</a></div>
+          <div class="res-card"><strong>Electronics Board Review</strong><div class="hint">Blueprint Breakdown</div><a href="https://www.youtube.com/watch?v=uBOGM3gkgrE" target="_blank">Open Lesson</a></div>
+          <div class="res-card"><strong>Physics One-Shot Marathon</strong><div class="hint">Full Chapter Concepts</div><a href="https://www.youtube.com/results?search_query=1st+puc+physics+one+shot" target="_blank">Search Marathon</a></div>
+          <div class="res-card"><strong>Chemistry Chemical Bonding</strong><div class="hint">Deep-Dive Marathon</div><a href="https://www.youtube.com/results?search_query=1st+puc+chemical+bonding+marathon" target="_blank">Search Geometry</a></div>
         </div>
       </div>
 
+      <!-- 7-Day Context Timetable -->
+      <div class="card">
+        <h2 style="margin:0 0 8px 0">Weekly Rhythm Plan</h2>
+        <div class="timetable">
+          <div class="day"><h6>Mon</h6><div class="slot">Physics Theory</div><div class="slot">Math Practice</div></div>
+          <div class="day"><h6>Tue</h6><div class="slot">Chem Bonding</div><div class="slot">Elec AC Circuits</div></div>
+          <div class="day"><h6>Wed</h6><div class="slot">Physics Problems</div><div class="slot">Math Derivatives</div></div>
+          <div class="day"><h6>Thu</h6><div class="slot">Chem Organic</div><div class="slot">Elec Diodes</div></div>
+          <div class="day"><h6>Fri</h6><div class="slot">Math Sets</div><div class="slot">Mixed Revision</div></div>
+          <div class="day"><h6>Sat</h6><div class="slot">College Classes</div><div class="slot">Weekly Review</div></div>
+          <div class="day rest"><div><h6 style="color:var(--accent-2)">Sun</h6><div style="font-size:11px">Recharge</div></div></div>
+        </div>
+      </div>
     </section>
 
+    <!-- Side Metrics panel -->
     <aside style="display:flex;flex-direction:column;gap:14px">
       <div class="card progress">
-        <h4 style="margin:0 0 8px 0">Checklist Progress</h4>
-        <div class="meter"><i id="meterFill" style="width:0%"></i></div>
-        <div style="margin-top:8px;color:var(--muted); font-weight: 600;" id="progressText">0 of items done</div>
+        <h4 style="margin:0 0 8px 0">Completion Metric</h4>
+        <div class="meter"><i id="meterFill"></i></div>
+        <div style="margin-top:8px;color:var(--muted);font-weight:600;font-size:13px" id="progressText">0 items loaded</div>
       </div>
-
       <div class="card">
-        <h4 style="margin:0 0 8px 0">Quick Notes</h4>
-        <textarea id="notes" placeholder="Drop formulas, reminders, or things to ask the teacher here..."></textarea>
-      </div>
-
-      <div class="card" style="text-align:center">
-        <h4 style="margin:0 0 6px 0">Gentle Reminder</h4>
-        <p style="margin:0;color:var(--muted); font-size: 14px;">If stress rises: stop, breathe for 3 minutes, then return to a single micro-task.</p>
+        <h4 style="margin:0 0 8px 0">Scratchpad Notes</h4>
+        <textarea id="notes" placeholder="Jot down lingering formula questions, derivations to double-check..."></textarea>
       </div>
     </aside>
   </div>
 
 <script>
 (function(){
-  // --- Dynamic Greeting ---
-  const hour = new Date().getHours();
-  const greetingEl = document.getElementById('greetingText');
-  let timeGreeting = "Good evening";
-  if(hour < 12) timeGreeting = "Good morning";
-  else if(hour < 18) timeGreeting = "Good afternoon";
-  greetingEl.innerHTML = `${timeGreeting}, Aishu &mdash; focused steps beat overwhelm.`;
+  // Time-driven Dynamic Greeting
+  const hr = new Date().getHours();
+  const greet = document.getElementById('greetingText');
+  let txt = "Good evening";
+  if(hr < 12) txt = "Good morning";
+  else if(hr < 18) txt = "Good afternoon";
+  greet.innerHTML = `${txt}, Aishu &mdash; execution clears away anxious fog.`;
 
-  // --- Clock ---
-  const nowEl = document.getElementById('nowDate');
-  function fmt(d){ return d.toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
-  nowEl.textContent = fmt(new Date());
-  setInterval(()=> nowEl.textContent = fmt(new Date()), 60_000);
+  // Standard Localized Clock
+  const clock = document.getElementById('nowDate');
+  function t(){ clock.textContent = new Date().toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+  t(); setInterval(t, 60000);
 
-  // --- Tabs ---
-  document.querySelectorAll('.tab-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const sub = btn.getAttribute('data-sub');
-      document.querySelectorAll('.subject-panel').forEach(p=>p.style.display = p.id===sub ? 'block' : 'none');
+  // Structural Tab Control
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      const target = b.getAttribute('data-sub');
+      document.querySelectorAll('.subject-panel').forEach(p=>p.style.display = p.id===target ? 'block' : 'none');
     });
   });
 
-  // --- Checklist Persistence & Gamification ---
-  const checks = document.querySelectorAll('.subject-panel input[type="checkbox"]');
-  const meter = document.getElementById('meterFill');
-  const progressText = document.getElementById('progressText');
-  const total = checks.length;
+  // State Monitoring, Persistence, and Reward System
+  const boxes = document.querySelectorAll('.subject-panel input[type="checkbox"]');
+  const fill = document.getElementById('meterFill');
+  const label = document.getElementById('progressText');
+  const count = boxes.length;
 
-  function triggerConfetti() {
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#38d6c9', '#60b986', '#ffffff'] });
+  function renderVisualState(box) {
+    const parent = box.closest('.topic');
+    if(box.checked) parent.classList.add('completed');
+    else parent.classList.remove('completed');
   }
 
-  function updateVisuals(cb) {
-     const topicDiv = cb.closest('.topic');
-     if(cb.checked) {
-         topicDiv.classList.add('completed');
-     } else {
-         topicDiv.classList.remove('completed');
-     }
-  }
-
-  function load(){
-    checks.forEach(cb=>{
-      const key = 'pcme_v2_'+cb.dataset.key; // updated key so it resets clean
-      cb.checked = localStorage.getItem(key) === '1';
-      updateVisuals(cb);
+  function syncState(){
+    boxes.forEach(b=>{
+      const storageKey = 'pcme_deep_v1_'+b.dataset.key;
+      b.checked = localStorage.getItem(storageKey) === '1';
+      renderVisualState(b);
     });
-    update(false);
+    calc(false);
   }
 
-  function update(showConfetti = true){
-    const done = Array.from(checks).filter(c=>c.checked).length;
-    const pct = Math.round((done/total)*100);
-    meter.style.width = pct+'%';
-    progressText.textContent = `${done} of ${total} items done (${pct}%)`;
+  function calc(celebrate = true){
+    const completedCount = Array.from(boxes).filter(x=>x.checked).length;
+    const ratio = Math.round((completedCount/count)*100);
+    fill.style.width = ratio+'%';
+    label.textContent = `${completedCount} of ${count} steps compiled (${ratio}%)`;
     
-    if(done === total && total > 0 && showConfetti) {
-        setTimeout(triggerConfetti, 300);
+    if(completedCount === count && count > 0 && celebrate) {
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
     }
   }
 
-  checks.forEach(cb=>{
-    cb.addEventListener('change', e=>{
-      const key = 'pcme_v2_'+e.target.dataset.key;
+  boxes.forEach(b=>{
+    b.addEventListener('change', e=>{
+      const key = 'pcme_deep_v1_'+e.target.dataset.key;
       localStorage.setItem(key, e.target.checked ? '1' : '0');
-      updateVisuals(e.target);
-      update(true);
-      
-      // Mini confetti on individual check
-      if(e.target.checked) {
-          confetti({particleCount: 20, spread: 40, origin: {y: 0.8}});
-      }
+      renderVisualState(e.target);
+      calc(true);
+      if(e.target.checked) confetti({ particleCount: 25, spread: 35, origin: { y: 0.85 } });
     });
   });
 
-  // --- Notes ---
-  const ta = document.getElementById('notes');
-  const notesKey = 'pcme_notes_v2';
-  ta.value = localStorage.getItem(notesKey) || '';
-  ta.addEventListener('input', ()=> localStorage.setItem(notesKey, ta.value));
+  // Persistent Input Pad
+  const pad = document.getElementById('notes');
+  pad.value = localStorage.getItem('pcme_pad_v1') || '';
+  pad.addEventListener('input', ()=> localStorage.setItem('pcme_pad_v1', pad.value));
 
-  // --- Pomodoro Timer ---
-  let timerInterval;
-  let timeLeft = 25 * 60; // 25 minutes
-  let isRunning = false;
-  const timeDisplay = document.getElementById('timeDisplay');
-  const startBtn = document.getElementById('startTimerBtn');
-  const resetBtn = document.getElementById('resetTimerBtn');
+  // Focus Tracker
+  let run = false, remaining = 25 * 60, interval;
+  const disp = document.getElementById('timeDisplay'), actionBtn = document.getElementById('startTimerBtn'), resetBtn = document.getElementById('resetTimerBtn');
 
-  function updateDisplay() {
-      const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-      const s = (timeLeft % 60).toString().padStart(2, '0');
-      timeDisplay.textContent = `${m}:${s}`;
+  function clockRender() {
+    disp.textContent = `${Math.floor(remaining/60).toString().padStart(2,'0')}:${(remaining%60).toString().padStart(2,'0')}`;
   }
 
-  startBtn.addEventListener('click', () => {
-      if(isRunning) {
-          clearInterval(timerInterval);
-          startBtn.textContent = 'Start';
-          startBtn.style.background = '';
-          isRunning = false;
-      } else {
-          startBtn.textContent = 'Pause';
-          startBtn.style.background = 'rgba(255,255,255,0.15)';
-          isRunning = true;
-          timerInterval = setInterval(() => {
-              if(timeLeft > 0) {
-                  timeLeft--;
-                  updateDisplay();
-              } else {
-                  clearInterval(timerInterval);
-                  isRunning = false;
-                  startBtn.textContent = 'Start';
-                  triggerConfetti();
-                  alert("Focus session complete! Take a 5-minute break.");
-              }
-          }, 1000);
-      }
+  actionBtn.addEventListener('click', ()=>{
+    if(run) {
+      clearInterval(interval);
+      actionBtn.textContent = 'Start';
+      run = false;
+    } else {
+      actionBtn.textContent = 'Pause';
+      run = true;
+      interval = setInterval(() => {
+        if(remaining > 0) { remaining--; clockRender(); }
+        else {
+          clearInterval(interval); run = false; actionBtn.textContent = 'Start';
+          confetti({ particleCount: 100, spread: 60 });
+          alert("Focus block completed successfully! Step away and stretch.");
+        }
+      }, 1000);
+    }
   });
 
-  resetBtn.addEventListener('click', () => {
-      clearInterval(timerInterval);
-      isRunning = false;
-      timeLeft = 25 * 60;
-      startBtn.textContent = 'Start';
-      startBtn.style.background = '';
-      updateDisplay();
-  });
+  resetBtn.addEventListener('click', ()=>{ clearInterval(interval); run = false; remaining = 25*60; actionBtn.textContent = 'Start'; clockRender(); });
 
-  // Initialize
-  load();
-  updateDisplay();
+  syncState();
+  clockRender();
 })();
 </script>
 </body>
