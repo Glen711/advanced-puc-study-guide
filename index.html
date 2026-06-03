@@ -1,9 +1,12 @@
+Here is the fully updated, single-file HTML dashboard with the comprehensive 1st PUC PCME syllabus broken down into detailed study sessions. I have created unique storage keys for this version so Aishu's progress will start fresh with this complete curriculum.
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PCME Ultimate Study Dashboard</title>
+<title>1st PUC PCME Ultimate Study Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
   :root{
@@ -12,7 +15,6 @@
     --muted:#99b3c6;
     --accent:#38d6c9;
     --accent-2:#60b986;
-    --glass: rgba(255,255,255,0.04);
     --radius:12px;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color-scheme: dark;
@@ -76,12 +78,12 @@
   <div class="wrap">
     <header class="hero">
       <div>
-        <h1 id="greetingText">Hi Aishu — focused steps beat overwhelm.</h1>
-        <p class="lead">Micro-sessions broken down into clear targets. One checkbox at a time[cite: 1].</p>
+        <h1 id="greetingText">Hi Aishu — 1st PUC focus mode activated.</h1>
+        <p class="lead">Complete PCME syllabus structured into actionable sessions. Check them off one by one.</p>
       </div>
       <div style="text-align:right">
-        <div class="phase">Phase starts: <strong style="color:var(--accent)">8 June 2026</strong>[cite: 1]</div>
-        <div class="date-small" id="nowDate">Loading date…[cite: 1]</div>
+        <div class="phase">Curriculum Tracker: <strong style="color:var(--accent)">1st PUC</strong></div>
+        <div class="date-small" id="nowDate">Loading date…</div>
       </div>
     </header>
 
@@ -91,7 +93,7 @@
         <div class="timer">
           <div>
             <h2 style="margin:0 0 4px 0">Focus Timer</h2>
-            <p class="hint" style="margin:0">Lock in for 25 minutes of high-intensity study.</p>
+            <p class="hint" style="margin:0">Lock in for 25 minutes of deep learning. No distractions.</p>
           </div>
           <div class="time-display" id="timeDisplay">25:00</div>
           <div style="display:flex;gap:8px">
@@ -103,7 +105,7 @@
 
       <!-- Syllabus Framework -->
       <div class="card">
-        <h2 style="margin:0 0 8px 0">Granular Session Checklist</h2>
+        <h2 style="margin:0 0 8px 0">Master Syllabus Checklist</h2>
         <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap">
           <button class="tab-btn active" data-sub="physics">Physics</button>
           <button class="tab-btn" data-sub="chemistry">Chemistry</button>
@@ -113,38 +115,68 @@
 
         <!-- PHYSICS -->
         <div class="subject-panel" id="physics">
-          <div class="topic"><input type="checkbox" data-key="p_units"><div style="margin-left:10px"><strong>Units & Measurements (Session 1)</strong><div class="subtasks">Read SI fundamental vs derived units; derive dimensions for Force, Work, and Pressure; solve 5 absolute/relative error percentage problems[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="p_motion_v"><div style="margin-left:10px"><strong>Motion: Vectors & Relative Speed (Session 2)</strong><div class="subtasks">Decompose vectors using cosine/sine laws; solve 4 downstream/upstream relative velocity problems; plot position-time graphs[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="p_projectile"><div style="margin-left:10px"><strong>Projectile Mechanics (Session 3)</strong><div class="subtasks">Derive Time of Flight, Maximum Height, and Horizontal Range equations; solve 5 standard trajectory problems[cite: 1].</div></div><div class="meta">Core Concept</div></div>
-          <div class="topic"><input type="checkbox" data-key="p_fbd"><div style="margin-left:10px"><strong>Newton's Laws & FBDs (Session 4)</strong><div class="subtasks">Master drawing Free-Body Diagrams; solve 3 multi-block tension strings and 3 inclined friction planes equations[cite: 1].</div></div><div class="meta">Critical</div></div>
-          <div class="topic"><input type="checkbox" data-key="p_work_energy"><div style="margin-left:10px"><strong>Work-Energy Theorem (Session 5)</strong><div class="subtasks">Apply W = delta K to variable force problems; solve 4 conservation of mechanical energy block-and-spring problems[cite: 1].</div></div><div class="meta">Scoring</div></div>
-          <div class="topic"><input type="checkbox" data-key="p_thermo"><div style="margin-left:10px"><strong>Thermodynamics Loops (Session 6)</strong><div class="subtasks">Calculate internal energy using first law ($\Delta U = Q - W$); solve 4 PV cyclical diagrams for net work output[cite: 1].</div></div><div class="meta">Formula Heavy</div></div>
+          <div class="topic"><input type="checkbox" data-key="puc_phy_1"><div style="margin-left:10px"><strong>Physical World, Units & Measurements</strong><div class="subtasks">Review fundamental forces, SI units, and dimensional analysis. Practice finding dimensions for constants and solving relative error calculations.</div></div><div class="meta">Core</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_2"><div style="margin-left:10px"><strong>Motion (Straight Line & Plane)</strong><div class="subtasks">Study v-t and p-t graphs. Derive equations of motion. Decompose vectors, practice projectile motion equations (Time of Flight, Max Height, Range), and solve relative velocity problems.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_3"><div style="margin-left:10px"><strong>Laws of Motion & Friction</strong><div class="subtasks">Newton's three laws, conservation of momentum, impulse. Master drawing Free-Body Diagrams (FBDs) for pulleys, inclines, and string tension. Solve static/kinetic friction problems.</div></div><div class="meta">Critical</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_4"><div style="margin-left:10px"><strong>Work, Power & Energy</strong><div class="subtasks">Work-energy theorem, conservative vs non-conservative forces. Practice conservation of mechanical energy problems, potential energy of springs, and collision mechanics (elastic/inelastic).</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_5"><div style="margin-left:10px"><strong>Systems of Particles & Rotational Motion</strong><div class="subtasks">Calculate center of mass for rigid bodies. Study torque, angular momentum, and conservation of angular momentum. Practice moment of inertia equations for standard shapes.</div></div><div class="meta">Advanced</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_6"><div style="margin-left:10px"><strong>Gravitation</strong><div class="subtasks">Kepler's laws, universal law of gravitation. Derive acceleration due to gravity (variation with depth/altitude). Calculate escape velocity and orbital velocity of satellites.</div></div><div class="meta">Scoring</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_7"><div style="margin-left:10px"><strong>Properties of Solids & Fluids</strong><div class="subtasks">Hooke's law, Young's modulus, stress-strain curve. For fluids: Pascal's law, Archimedes principle, Bernoulli's theorem, viscosity, and surface tension fundamentals.</div></div><div class="meta">Formula Heavy</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_8"><div style="margin-left:10px"><strong>Thermodynamics & Kinetic Theory</strong><div class="subtasks">Zeroth, First (dQ = dU + dW), and Second laws of thermodynamics. Reversible/irreversible processes. Kinetic theory postulates, ideal gas equation, and RMS speed calculations.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_phy_9"><div style="margin-left:10px"><strong>Oscillations and Waves</strong><div class="subtasks">Simple Harmonic Motion (SHM) equations, time period of simple pendulums and spring systems. Wave motion types, speed of traveling waves, superposition, and Doppler effect basics.</div></div><div class="meta">Conceptual</div></div>
         </div>
 
         <!-- CHEMISTRY -->
         <div class="subject-panel" id="chemistry" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="c_vsepr"><div style="margin-left:10px"><strong>VSEPR & Geometry (Session 1)</strong><div class="subtasks">Predict geometry and hybridisation for $BF_3, SF_6, PCl_5, NH_3, H_2O$; draw Lewis structures showing explicit lone pairs[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="c_hess"><div style="margin-left:10px"><strong>Thermochemistry & Hess's Law (Session 2)</strong><div class="subtasks">Calculate overall reaction enthalpies by combining intermediate step equations; solve 4 standard heat of formation problems[cite: 1].</div></div><div class="meta">Numerical</div></div>
-          <div class="topic"><input type="checkbox" data-key="c_le_chatelier"><div style="margin-left:10px"><strong>Chemical Equilibrium (Session 3)</strong><div class="subtasks">State shifts when changing pressure, volume, temperature; solve 3 structural $K_c$ and $K_p$ value calculations[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="c_nomenclature"><div style="margin-left:10px"><strong>IUPAC Organic Rules (Session 4)</strong><div class="subtasks">Apply lowest-locant rule to polyfunctional chains; draw structures for 8 advanced branched alkanes/alkenes[cite: 1].</div></div><div class="meta">Fundamental</div></div>
-          <div class="topic"><input type="checkbox" data-key="c_stoich"><div style="margin-left:10px"><strong>Limiting Reagents (Session 5)</strong><div class="subtasks">Identify excess vs limiting reactants from initial masses; calculate product yields using molar mass conversion tracking[cite: 1].</div></div><div class="meta">Scoring</div></div>
+          <div class="topic"><input type="checkbox" data-key="puc_chem_1"><div style="margin-left:10px"><strong>Basic Concepts & Atomic Structure</strong><div class="subtasks">Mole concept, empirical/molecular formulas, limiting reagents. Atomic models (Bohr, Quantum), quantum numbers, electronic configuration rules (Aufbau, Pauli, Hund).</div></div><div class="meta">Core</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_chem_2"><div style="margin-left:10px"><strong>Periodicity & Chemical Bonding</strong><div class="subtasks">Periodic trends (radius, ionization enthalpy, electronegativity). VSEPR theory, hybridization (sp, sp2, sp3), Molecular Orbital Theory (MOT) for diatomic molecules, hydrogen bonding.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_chem_3"><div style="margin-left:10px"><strong>States of Matter & Thermodynamics</strong><div class="subtasks">Gas laws (Boyle, Charles, Avogadro), Ideal gas equation, deviations of real gases. Hess's law of constant heat summation, enthalpy calculations, entropy, and Gibbs free energy conditions.</div></div><div class="meta">Numerical</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_chem_4"><div style="margin-left:10px"><strong>Equilibrium & Redox Reactions</strong><div class="subtasks">Le Chatelier's principle, Kc and Kp calculations, pH scale, buffer solutions, solubility product. Assigning oxidation numbers, balancing redox reactions via half-reaction method.</div></div><div class="meta">Critical</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_chem_5"><div style="margin-left:10px"><strong>Hydrogen, s-Block & p-Block Elements</strong><div class="subtasks">Preparation and properties of Hydrogen, water, and hydrogen peroxide. Group 1 & 2 trends and anomalous behaviors. Group 13 & 14 key compounds and structural properties.</div></div><div class="meta">Memory Heavy</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_chem_6"><div style="margin-left:10px"><strong>Organic Chemistry Basics & Hydrocarbons</strong><div class="subtasks">IUPAC nomenclature, isomerism (structural/stereo), inductive and resonance effects. Alkanes, alkenes, alkynes properties, Markownikoff's rule, and aromaticity (Benzene reactions).</div></div><div class="meta">High Weight</div></div>
         </div>
 
         <!-- MATHEMATICS -->
         <div class="subject-panel" id="maths" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="m_venn"><div style="margin-left:10px"><strong>Venn Sets & Operations (Session 1)</strong><div class="subtasks">Shade union, intersection, and complements; solve 5 three-set word problems using intersection equations[cite: 1].</div></div><div class="meta">Quick Win</div></div>
-          <div class="topic"><input type="checkbox" data-key="m_trig_id"><div style="margin-left:10px"><strong>Trigonometric Transformations (Session 2)</strong><div class="subtasks">Memorize and derive compound angles; prove 6 identities using sum-to-product conversions[cite: 1].</div></div><div class="meta">Core Skill</div></div>
-          <div class="topic"><input type="checkbox" data-key="m_limits"><div style="margin-left:10px"><strong>Limits & L'Hospital (Session 3)</strong><div class="subtasks">Evaluate $0/0$ and $\infty/\infty$ indeterminate forms using factoring, rationalization, and L'Hospital's Rule[cite: 1].</div></div><div class="meta">Critical</div></div>
-          <div class="topic"><input type="checkbox" data-key="m_derivatives"><div style="margin-left:10px"><strong>First Principles Derivatives (Session 4)</strong><div class="subtasks">Solve limit definitions of derivatives; practice product, quotient, and chain rules on 10 explicit algebraic expressions[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="m_lines"><div style="margin-left:10px"><strong>Straight Lines Coords (Session 5)</strong><div class="subtasks">Convert between slope-intercept, intercept, and normal line equations; calculate shortest distance from point to line[cite: 1].</div></div><div class="meta">Scoring</div></div>
+          <div class="topic"><input type="checkbox" data-key="puc_mat_1"><div style="margin-left:10px"><strong>Sets, Relations & Functions</strong><div class="subtasks">Subsets, Venn diagrams, union/intersection operations. Domain and range of relations. Types of functions (polynomial, rational, modulus, signum) and their graphs.</div></div><div class="meta">Core</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_2"><div style="margin-left:10px"><strong>Trigonometric Functions</strong><div class="subtasks">Radian/degree conversions, sign conventions in quadrants. Sum and difference of two angles, multiple and submultiple angle identities. Solving general trigonometric equations.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_3"><div style="margin-left:10px"><strong>Complex Numbers & Quadratic Equations</strong><div class="subtasks">Algebra of complex numbers (a+ib), Argand plane, polar representation. Solving quadratic equations in the complex number system.</div></div><div class="meta">Scoring</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_4"><div style="margin-left:10px"><strong>Linear Inequalities, Permutations & Combinations</strong><div class="subtasks">Graphical solution of linear inequalities in two variables. Fundamental principle of counting, factorials, nPr and nCr formulas, and application in word problems.</div></div><div class="meta">Conceptual</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_5"><div style="margin-left:10px"><strong>Binomial Theorem, Sequences & Series</strong><div class="subtasks">Expansion of (a+b)^n, finding general and middle terms. Arithmetic Progression (AP) and Geometric Progression (GP) nth term and sum of n terms. AM and GM relationships.</div></div><div class="meta">Numerical</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_6"><div style="margin-left:10px"><strong>Straight Lines, Conic Sections & 3D Geometry</strong><div class="subtasks">Slope, intercept, and normal forms of lines. Distance from a point to a line. Equations and standard properties of Parabolas, Ellipses, and Hyperbolas. Distance formula in 3D.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_mat_7"><div style="margin-left:10px"><strong>Limits, Derivatives & Statistics</strong><div class="subtasks">Evaluating limits using standard formulas (L'Hospital if applicable). First principle derivatives, product/quotient rules. Calculating Mean Deviation, Variance, and Standard Deviation.</div></div><div class="meta">Critical</div></div>
         </div>
 
         <!-- ELECTRONICS -->
         <div class="subject-panel" id="electronics" style="display:none">
-          <div class="topic"><input type="checkbox" data-key="e_kcl_kvl"><div style="margin-left:10px"><strong>Kirchhoff's Circuit Laws (Session 1)</strong><div class="subtasks">Set up loop current equations for 3-mesh resistive networks; solve individual branches for precise current/voltage drop[cite: 1].</div></div><div class="meta">High Weight</div></div>
-          <div class="topic"><input type="checkbox" data-key="e_phasors"><div style="margin-left:10px"><strong>AC Fundamentals & Phasors (Session 2)</strong><div class="subtasks">Convert peak to RMS values; draw phase relationship graphs for purely inductive, capacitive, and resistive circuits[cite: 1].</div></div><div class="meta">Core Concept</div></div>
-          <div class="topic"><input type="checkbox" data-key="e_diodes"><div style="margin-left:10px"><strong>Semiconductor Diodes (Session 3)</strong><div class="subtasks">Draw forward/reverse bias characteristic curves; track current flow in half-wave vs full-wave bridge rectifier layouts[cite: 1].</div></div><div class="meta">Critical</div></div>
-          <div class="topic"><input type="checkbox" data-key="e_logic"><div style="margin-left:10px"><strong>Logic Gates & Boolean (Session 4)</strong><div class="subtasks">Construct truth tables for combined AND, OR, NOT, NAND, NOR setups; simplify expressions using De Morgan's Laws[cite: 1].</div></div><div class="meta">Quick Win</div></div>
+          <div class="topic"><input type="checkbox" data-key="puc_elec_1"><div style="margin-left:10px"><strong>Introduction & Principles of Electricity</strong><div class="subtasks">Scope of electronics. Voltage, current, resistance definitions. Ohm's Law, Kirchhoff's Current Law (KCL) and Voltage Law (KVL). Practice solving series/parallel resistor circuits.</div></div><div class="meta">Core</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_elec_2"><div style="margin-left:10px"><strong>Network Theorems</strong><div class="subtasks">Superposition theorem, Thevenin's theorem, Norton's theorem, and Maximum Power Transfer theorem. Practice reducing complex circuits to equivalent single sources.</div></div><div class="meta">High Weight</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_elec_3"><div style="margin-left:10px"><strong>Measuring Instruments</strong><div class="subtasks">Principles and block diagrams of voltmeters, ammeters, and multimeters. Understanding the Cathode Ray Oscilloscope (CRO) block diagram and measuring amplitude/frequency.</div></div><div class="meta">Theoretical</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_elec_4"><div style="margin-left:10px"><strong>Passive Electronic Components</strong><div class="subtasks">Color coding of resistors. Types of capacitors and inductors. Energy storage equations. Calculating equivalent capacitance/inductance in series and parallel combinations.</div></div><div class="meta">Scoring</div></div>
+          
+          <div class="topic"><input type="checkbox" data-key="puc_elec_5"><div style="margin-left:10px"><strong>AC & DC Applications</strong><div class="subtasks">Peak, RMS, and average values of AC. Analysis of purely resistive, inductive, and capacitive circuits. Principles of transformers. Basic PN junction diode rectification (Half/Full wave).</div></div><div class="meta">Critical</div></div>
         </div>
       </div>
 
@@ -156,22 +188,6 @@
           <div class="res-card"><strong>Chemistry Core</strong><div class="hint">Vedantu Karnataka</div><a href="https://www.youtube.com/watch?v=1VDGwbRThBU" target="_blank">Open Lesson</a></div>
           <div class="res-card"><strong>Maths Complete Sets</strong><div class="hint">Vedantu SANKALP</div><a href="https://www.youtube.com/watch?v=2cdegZ7Byj4" target="_blank">Open Lesson</a></div>
           <div class="res-card"><strong>Electronics Board Review</strong><div class="hint">Blueprint Breakdown</div><a href="https://www.youtube.com/watch?v=uBOGM3gkgrE" target="_blank">Open Lesson</a></div>
-          <div class="res-card"><strong>Physics One-Shot Marathon</strong><div class="hint">Full Chapter Concepts</div><a href="https://www.youtube.com/results?search_query=1st+puc+physics+one+shot" target="_blank">Search Marathon</a></div>
-          <div class="res-card"><strong>Chemistry Chemical Bonding</strong><div class="hint">Deep-Dive Marathon</div><a href="https://www.youtube.com/results?search_query=1st+puc+chemical+bonding+marathon" target="_blank">Search Geometry</a></div>
-        </div>
-      </div>
-
-      <!-- 7-Day Context Timetable -->
-      <div class="card">
-        <h2 style="margin:0 0 8px 0">Weekly Rhythm Plan</h2>
-        <div class="timetable">
-          <div class="day"><h6>Mon</h6><div class="slot">Physics Theory</div><div class="slot">Math Practice</div></div>
-          <div class="day"><h6>Tue</h6><div class="slot">Chem Bonding</div><div class="slot">Elec AC Circuits</div></div>
-          <div class="day"><h6>Wed</h6><div class="slot">Physics Problems</div><div class="slot">Math Derivatives</div></div>
-          <div class="day"><h6>Thu</h6><div class="slot">Chem Organic</div><div class="slot">Elec Diodes</div></div>
-          <div class="day"><h6>Fri</h6><div class="slot">Math Sets</div><div class="slot">Mixed Revision</div></div>
-          <div class="day"><h6>Sat</h6><div class="slot">College Classes</div><div class="slot">Weekly Review</div></div>
-          <div class="day rest"><div><h6 style="color:var(--accent-2)">Sun</h6><div style="font-size:11px">Recharge</div></div></div>
         </div>
       </div>
     </section>
@@ -179,7 +195,7 @@
     <!-- Side Metrics panel -->
     <aside style="display:flex;flex-direction:column;gap:14px">
       <div class="card progress">
-        <h4 style="margin:0 0 8px 0">Completion Metric</h4>
+        <h4 style="margin:0 0 8px 0">Overall Completion</h4>
         <div class="meter"><i id="meterFill"></i></div>
         <div style="margin-top:8px;color:var(--muted);font-weight:600;font-size:13px" id="progressText">0 items loaded</div>
       </div>
@@ -229,7 +245,7 @@
 
   function syncState(){
     boxes.forEach(b=>{
-      const storageKey = 'pcme_deep_v1_'+b.dataset.key;
+      const storageKey = 'puc_master_v1_'+b.dataset.key;
       b.checked = localStorage.getItem(storageKey) === '1';
       renderVisualState(b);
     });
@@ -238,9 +254,9 @@
 
   function calc(celebrate = true){
     const completedCount = Array.from(boxes).filter(x=>x.checked).length;
-    const ratio = Math.round((completedCount/count)*100);
+    const ratio = count > 0 ? Math.round((completedCount/count)*100) : 0;
     fill.style.width = ratio+'%';
-    label.textContent = `${completedCount} of ${count} steps compiled (${ratio}%)`;
+    label.textContent = `${completedCount} of ${count} topics compiled (${ratio}%)`;
     
     if(completedCount === count && count > 0 && celebrate) {
       confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
@@ -249,7 +265,7 @@
 
   boxes.forEach(b=>{
     b.addEventListener('change', e=>{
-      const key = 'pcme_deep_v1_'+e.target.dataset.key;
+      const key = 'puc_master_v1_'+e.target.dataset.key;
       localStorage.setItem(key, e.target.checked ? '1' : '0');
       renderVisualState(e.target);
       calc(true);
@@ -259,8 +275,8 @@
 
   // Persistent Input Pad
   const pad = document.getElementById('notes');
-  pad.value = localStorage.getItem('pcme_pad_v1') || '';
-  pad.addEventListener('input', ()=> localStorage.setItem('pcme_pad_v1', pad.value));
+  pad.value = localStorage.getItem('puc_notes_master') || '';
+  pad.addEventListener('input', ()=> localStorage.setItem('puc_notes_master', pad.value));
 
   // Focus Tracker
   let run = false, remaining = 25 * 60, interval;
@@ -297,3 +313,5 @@
 </script>
 </body>
 </html>
+
+```
